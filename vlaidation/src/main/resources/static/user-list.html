@@ -1,0 +1,64 @@
+  <!DOCTYPE html>
+  <html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>User List</title>
+    <style>
+      .error {
+          color: red;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>User List</h1>
+  <table border="1">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mobile Number</th>
+      <th>Email ID</th>
+      <th>Father's Name</th>
+      <th>PAN Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.mobileNumber}"></td>
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.fathersName}"></td>
+      <td th:text="${user.panNumber}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>Add</h2>
+  <form th:object="${newUser}" th:action="@{/addUser}" method="post">
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" />
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></span>
+    <br/>
+
+    <label>Mobile Number:</label>
+    <input type="text" th:field="*{mobileNumber}" />
+    <span th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}" class="error"></span>
+    <br/>
+
+    <label>Email ID:</label>
+    <input type="text" th:field="*{email}" />
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></span>
+    <br/>
+
+    <label>Father's Name:</label>
+    <input type="text" th:field="*{fathersName}" />
+    <span th:if="${#fields.hasErrors('fathersName')}" th:errors="*{fathersName}" class="error"></span>
+    <br/>
+
+    <label>PAN Number:</label>
+    <input type="text" th:field="*{panNumber}" />
+    <span th:if="${#fields.hasErrors('panNumber')}" th:errors="*{panNumber}" class="error"></span>
+    <br/>
+
+    <input type="submit" value="AddData" />
+  </form>
+  </body>
+  </html>
